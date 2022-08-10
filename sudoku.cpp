@@ -5,6 +5,7 @@
 using namespace std;
 
 vector<vector<int>> table(9, vector<int>(9, 0));
+bool iscomplete = false;
 
 bool isputable(int x, int y, int n)
 {
@@ -60,17 +61,20 @@ void print()
 
 void sudoku(int num)
 {
-    if(num = 80)
+    if(iscomplete == true)
+    {
+        return;
+    }
+    if(num == 81 && iscomplete == false)
     {
         print();
+        iscomplete = true;
         return;
     }
     else
     {
         int colN = num % 9;
         int rowN = num / 9;
-        
-        cout << colN << " "  << rowN << endl;
         
         if(table[colN][rowN] == 0)
         {
@@ -96,47 +100,29 @@ void sudoku(int num)
 int main()
 {
     string temp;
-    int col, row, num;
+    int cnt, num;
    
     
-    while(true)
+    for(int i = 0; i < 81; i++)
     {
-        cout << "행과 열, 숫자를 입력해주세요. 입력이 끝났다면 -1을 입력해주세요." << endl;
-        cout << "행 : ";
-        cin >> col;
-        
-        if(col < -1 || col > 9)
-        {
-            cout << "잘못된 숫자입니다.";
-            continue;
-        }
-        
-        cout << "열 : ";
-        cin >> row;
-        
-        if(row < -1 || row > 9)
-        {
-            cout << "잘못된 숫자입니다.";
-            continue;
-        }
-        
-        cout << "숫자 : ";
         cin >> num;
+        cout << endl;
         
-        if(num < -1 || num > 9)
+        if(num == -1)
         {
-            cout << "잘못된 숫자입니다.";
-            continue;
-        }
-        
-        if(col == -1 || row == -1 || num == (-1))
-        {//
             break;
         }
+        if(num == -2)
+        {
+            i = i - 2;
+            continue;
+        }
         
-        table[col-1][row-1] = num; 
+        table[i/9][i%9] = num;
         
         print();   
+        
+        cout << endl;
     }
 
 cout << endl;
